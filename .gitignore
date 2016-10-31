@@ -13,3 +13,5 @@ ehthumbs.db
 Thumbs.db
 .vagrant
 .ruby-version
+
+puppet/

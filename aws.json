@@ -52,7 +52,7 @@
     "facter": {
       "function": "{{user `function`}}",
       "project": "{{user `project`}}",
-      "environment": "{{user `environment`}}",
+      "ourenvironment": "{{user `environment`}}",
       "packerbuild": "true"
     }
   }]

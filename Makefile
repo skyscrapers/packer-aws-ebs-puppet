@@ -13,7 +13,7 @@ build:
 	test -n "$(PACKER_PROFILE)" #$$PACKER_PROFILE
 	if [[ ! -d "puppet/" ]]; then git clone $(PUPPET_REPO) puppet; fi
 	cd puppet && git pull && git submodule update --init --recursive
-	packer build --debug -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' aws.json
+	packer build -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' aws.json
 
 clean:
 	rm -rf puppet

@@ -46,7 +46,7 @@
   {
     "type": "puppet-masterless",
     "manifest_file": "puppet/manifests/default.pp",
-    "module_paths": ["puppet/modules"],
+    "module_paths": ["puppet/modules","../modules"],
     "hiera_config_path": "puppet/hiera/hiera.yaml",
     "working_directory": "/tmp/hiera",
     "facter": {

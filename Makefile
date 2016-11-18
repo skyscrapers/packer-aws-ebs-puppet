@@ -4,7 +4,7 @@ AWS_REGION ?= eu-west-1
 ifeq ($(wildcard ../modules),)
   MODULE_PATHS ?= '"puppet/modules"'
 else
-  MODULE_PATHS ?= '"puppet/modules", "../modules"'
+  MODULE_PATHS ?= '"puppet/modules","../modules"'
 endif
 
 check-variables:

@@ -6,7 +6,8 @@
     "environment": "",
     "project": "",
     "function": "",
-    "aws_ec2_profile": ""
+    "aws_ec2_profile": "",
+    "module_paths": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -46,7 +47,7 @@
   {
     "type": "puppet-masterless",
     "manifest_file": "puppet/manifests/default.pp",
-    "module_paths": ["puppet/modules","../modules"],
+    "module_paths": "{{user `module_paths`}}",
     "hiera_config_path": "puppet/hiera/hiera.yaml",
     "working_directory": "/tmp/hiera",
     "facter": {

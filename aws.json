@@ -8,7 +8,7 @@
     "function": "",
     "aws_ec2_profile": "",
     "module_paths": "",
-    "root_volume_size":"8"
+    "root_volume_size":""
   },
   "builders": [{
     "type": "amazon-ebs",

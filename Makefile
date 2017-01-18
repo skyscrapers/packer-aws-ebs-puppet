@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 AWS_SOURCE_AMI ?= ami-7abd0209
 AWS_REGION ?= eu-west-1
 

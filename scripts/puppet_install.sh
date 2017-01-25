@@ -7,7 +7,7 @@ echo " - Done"
 sudo /usr/bin/logger -t autobootstrap "installed puppet"
 echo "* installing gems"
 sudo gem install hiera-eyaml
-sudo gem install aws-sdk
+sudo gem install aws-sdk -v '~> 2.6.11'
 sudo gem install hiera-eyaml-kms
 echo " - Done"
 sudo /usr/bin/logger -t autobootstrap "installed puppet gems"

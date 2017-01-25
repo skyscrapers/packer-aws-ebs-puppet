@@ -11,4 +11,5 @@ Create an AMI from puppet files
 * [`FUNCTION`]: The instance function, used in facter
 * [`PUPPET_REPO`]: A git url to the puppet files
 * [`PACKER_PROFILE`]: The name of the profile to use when running packer
-* [`ROOT_VOLUME_SIZE`]: The size of the root volume default to 8
+* [`ROOT_VOLUME_SIZE`]: The size (in GiB) of the root volume, default to `8`
+* [`ROOT_VOLUME_TYPE`]: The size of the root volume, default to `standard`

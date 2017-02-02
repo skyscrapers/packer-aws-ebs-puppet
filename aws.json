@@ -8,8 +8,10 @@
     "function": "",
     "aws_ec2_profile": "",
     "module_paths": "",
-    "root_volume_size":"",
-    "root_volume_type":""
+    "root_volume_size": "",
+    "root_volume_type": "",
+    "manifest_file": "",
+    "hiera_config_path": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -55,9 +57,9 @@
   },
   {
     "type": "puppet-masterless",
-    "manifest_file": "puppet/manifests/default.pp",
+    "manifest_file": "{{user `manifest_file`}}",
     "module_paths": "{{user `module_paths`}}",
-    "hiera_config_path": "puppet/hiera/hiera.yaml",
+    "hiera_config_path": "{{user `hiera_config_path`}}",
     "working_directory": "/tmp/hiera",
     "facter": {
       "function": "{{user `function`}}",

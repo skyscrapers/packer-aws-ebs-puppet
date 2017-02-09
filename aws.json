@@ -67,5 +67,8 @@
       "ourenvironment": "{{user `environment`}}",
       "packerbuild": "true"
     }
+  },{
+    "type": "shell",
+    "script": "scripts/cleanup.sh"
   }]
 }

@@ -32,5 +32,6 @@ sudo /opt/puppetlabs/puppet/bin/gem install hiera-eyaml
 # https://github.com/aws/aws-codedeploy-agent/commit/50db2ec9013cfe8f1a857de53c806d6c67d8d07b
 sudo /opt/puppetlabs/puppet/bin/gem install aws-sdk -v '~> 2.6.11'
 sudo /opt/puppetlabs/puppet/bin/gem install hiera-eyaml-kms
+sudo /opt/puppetlabs/puppet/bin/gem install deep_merge
 echo " - Done"
 sudo /usr/bin/logger -t autobootstrap "installed puppet gems"

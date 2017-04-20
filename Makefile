@@ -27,7 +27,7 @@ init:
 	test -n "$(GIT_BRANCH)"  # $$GIT_BRANCH
 	if [[ -d "puppet/" ]] && ! git --git-dir=./puppet/.git remote get-url origin | grep --quiet $(PUPPET_REPO); then rm -rf ./puppet; fi
 	if [[ ! -d "puppet/" ]]; then git clone -b $(GIT_BRANCH) $(PUPPET_REPO) puppet; fi
-	cd puppet && git pull && git checkout $(GIT_BRANCH) && git submodule update --init --recursive
+	cd puppet && git fetch && git checkout $(GIT_BRANCH) && git pull && git submodule update --init --recursive
 	if [[ -e "puppet/Puppetfile" ]]; then cd puppet; r10k puppetfile install; fi
 
 build: init

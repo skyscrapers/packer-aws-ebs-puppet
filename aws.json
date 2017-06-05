@@ -12,7 +12,7 @@
     "root_volume_type": "",
     "manifest_file": "",
     "hiera_config_path": "",
-    "aws_share": ""
+    "share_accounts": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -23,8 +23,8 @@
     "ssh_username": "ubuntu",
     "ssh_pty" : true,
     "ami_name": "ebs-{{user `project`}}-{{user `function`}}-{{isotime \"200601020304\"}}",
-    "ami_users": "{{user `aws_share`}}",
-    "snapshot_users": "{{user `aws_share`}}",
+    "ami_users": "{{user `share_accounts`}}",
+    "snapshot_users": "{{user `share_accounts`}}",
     "ami_block_device_mappings": [
     {
       "device_name": "/dev/sda1",

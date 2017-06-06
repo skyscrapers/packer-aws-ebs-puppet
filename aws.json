@@ -11,7 +11,8 @@
     "root_volume_size": "",
     "root_volume_type": "",
     "manifest_file": "",
-    "hiera_config_path": ""
+    "hiera_config_path": "",
+    "hiera_path": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -52,7 +53,7 @@
   },
   {
     "type": "file",
-    "source": "puppet/hiera/",
+    "source": "{{user `hiera_path`}}",
     "destination": "/tmp/hiera/"
   },
   {

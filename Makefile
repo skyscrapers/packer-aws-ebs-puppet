@@ -11,7 +11,8 @@ PUPPET_REPO_PATH ?= puppet
 MANAGE_GIT ?= true
 
 MANIFEST_FILE ?= $(PUPPET_REPO_PATH)/manifests/default.pp
-HIERA_CONFIG_PATH ?= $(PUPPET_REPO_PATH)/hiera/hiera.yaml
+HIERA_PATH ?= $(PUPPET_REPO_PATH)/hiera
+HIERA_CONFIG_PATH ?= $(HIERA_PATH)/hiera.yaml
 
 ifeq ($(wildcard ../modules),)
   MODULE_PATHS ?= '"$(PUPPET_REPO_PATH)/modules"'
@@ -40,7 +41,7 @@ build: init
 	test -n "$(PROJECT)"  # $$PROJECT
 	test -n "$(FUNCTION)"  # $$FUNCTION
 	test -n "$(AWS_REGION)"  # $$AWS_REGION
-	packer build $(DEBUG_FLAG) -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'root_volume_size=$(ROOT_VOLUME_SIZE)' -var 'root_volume_type=$(ROOT_VOLUME_TYPE)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' -var 'hiera_config_path=$(HIERA_CONFIG_PATH)' -var 'manifest_file=$(MANIFEST_FILE)' -var 'module_paths=$(MODULE_PATHS)' aws.json
+	packer build $(DEBUG_FLAG) -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'root_volume_size=$(ROOT_VOLUME_SIZE)' -var 'root_volume_type=$(ROOT_VOLUME_TYPE)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' -var 'hiera_config_path=$(HIERA_CONFIG_PATH)' -var 'hiera_path=$(HIERA_PATH)' -var 'manifest_file=$(MANIFEST_FILE)' -var 'module_paths=$(MODULE_PATHS)' aws.json
 
 clean:
 	rm -rf puppet

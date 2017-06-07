@@ -12,6 +12,7 @@
     "root_volume_type": "",
     "manifest_file": "",
     "hiera_config_path": "",
+    "share_accounts": "",
     "hiera_path": ""
   },
   "builders": [{
@@ -23,6 +24,8 @@
     "ssh_username": "ubuntu",
     "ssh_pty" : true,
     "ami_name": "ebs-{{user `project`}}-{{user `function`}}-{{isotime \"200601020304\"}}",
+    "ami_users": "{{user `share_accounts`}}",
+    "snapshot_users": "{{user `share_accounts`}}",
     "ami_block_device_mappings": [
     {
       "device_name": "/dev/sda1",
@@ -71,5 +74,12 @@
   },{
     "type": "shell",
     "script": "scripts/cleanup.sh"
-  }]
+  }],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "packer_manifest.json",
+      "strip_path": true
+    }
+  ]
 }

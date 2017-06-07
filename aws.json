@@ -74,5 +74,12 @@
   },{
     "type": "shell",
     "script": "scripts/cleanup.sh"
-  }]
+  }],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "packer_manifest.json",
+      "strip_path": true
+    }
+  ]
 }

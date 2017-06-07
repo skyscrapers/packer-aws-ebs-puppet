@@ -1,17 +1,23 @@
+.PHONY: all
+
 SHELL := /bin/bash
 SOURCE_AMI ?= ami-7abd0209
 AWS_REGION ?= eu-west-1
 ROOT_VOLUME_SIZE ?= 8
 ROOT_VOLUME_TYPE ?= standard
-MANIFEST_FILE ?= puppet/manifests/default.pp
-HIERA_CONFIG_PATH ?= puppet/hiera/hiera.yaml
 GIT_BRANCH ?= master
 DEBUG ?= false
+PUPPET_REPO_PATH ?= puppet
+MANAGE_GIT ?= true
+
+MANIFEST_FILE ?= $(PUPPET_REPO_PATH)/manifests/default.pp
+HIERA_PATH ?= $(PUPPET_REPO_PATH)/hiera
+HIERA_CONFIG_PATH ?= $(HIERA_PATH)/hiera.yaml
 
 ifeq ($(wildcard ../modules),)
-  MODULE_PATHS ?= '"puppet/modules"'
+  MODULE_PATHS ?= '"$(PUPPET_REPO_PATH)/modules"'
 else
-  MODULE_PATHS ?= '"puppet/modules","../modules"'
+  MODULE_PATHS ?= '"$(PUPPET_REPO_PATH)/modules","../modules"'
 endif
 
 ifeq ($(DEBUG),true)
@@ -23,12 +29,10 @@ endif
 check-variables:
 
 init:
-	test -n "$(PUPPET_REPO)"  # $$PUPPET_REPO
-	test -n "$(GIT_BRANCH)"  # $$GIT_BRANCH
-	if [[ -d "puppet/" ]] && ! git --git-dir=./puppet/.git remote get-url origin | grep --quiet $(PUPPET_REPO); then rm -rf ./puppet; fi
-	if [[ ! -d "puppet/" ]]; then git clone -b $(GIT_BRANCH) $(PUPPET_REPO) puppet; fi
-	cd puppet && git fetch && git checkout $(GIT_BRANCH) && git pull && git submodule update --init --recursive
-	if [[ -e "puppet/Puppetfile" ]]; then cd puppet; r10k puppetfile install; fi
+ifeq ($(MANAGE_GIT),true)
+	./scripts/init_git.sh
+endif
+	if [[ -e "$(PUPPET_REPO_PATH)/Puppetfile" ]]; then cd $(PUPPET_REPO_PATH); r10k puppetfile install; fi
 
 build: init
 	test -n "$(PACKER_PROFILE)" #$$PACKER_PROFILE
@@ -37,7 +41,8 @@ build: init
 	test -n "$(PROJECT)"  # $$PROJECT
 	test -n "$(FUNCTION)"  # $$FUNCTION
 	test -n "$(AWS_REGION)"  # $$AWS_REGION
-	packer build $(DEBUG_FLAG) -var 'share_accounts=$(SHARE_ACCOUNTS)' -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'root_volume_size=$(ROOT_VOLUME_SIZE)' -var 'root_volume_type=$(ROOT_VOLUME_TYPE)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' -var 'hiera_config_path=$(HIERA_CONFIG_PATH)' -var 'manifest_file=$(MANIFEST_FILE)' -var 'module_paths=$(MODULE_PATHS)' aws.json
+
+	packer build $(DEBUG_FLAG) -var 'share_accounts=$(SHARE_ACCOUNTS)'  -var 'aws_region=$(AWS_REGION)' -var 'aws_source_ami=$(SOURCE_AMI)' -var 'project=$(PROJECT)' -var 'environment=$(ENVIRONMENT)' -var 'function=$(FUNCTION)' -var 'root_volume_size=$(ROOT_VOLUME_SIZE)' -var 'root_volume_type=$(ROOT_VOLUME_TYPE)' -var 'aws_ec2_profile=$(PACKER_PROFILE)' -var 'hiera_config_path=$(HIERA_CONFIG_PATH)' -var 'hiera_path=$(HIERA_PATH)/' -var 'manifest_file=$(MANIFEST_FILE)' -var 'module_paths=$(MODULE_PATHS)' aws.json
 
 clean:
 	rm -rf puppet

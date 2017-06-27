@@ -1,7 +1,7 @@
 {
   "variables": {
     "aws_region": "eu-west-1",
-    "aws_instance_type": "t2.micro",
+    "aws_instance_type": "",
     "aws_source_ami": "",
     "environment": "",
     "project": "",

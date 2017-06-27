@@ -17,3 +17,5 @@ Create an AMI from puppet files
 * [`PUPPET_REPO_PATH`]: Path to the Puppet directory, relative to the Makefile, defaults to `puppet`.
 * [`GIT_BRANCH`]: Git branch to use in the Puppet repository, defaults to `master`.
 * [`MANAGE_GIT`]: Prepare the Puppet repository by cloning it (if it doesn't exist), checkout `GIT_BRANCH` and pulling latest changes, defaults to `true`.
+* [`INSTANCE_TYPE`]: Sets the instance type to build on, defaults to `t2.micro`.
+

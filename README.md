@@ -18,4 +18,4 @@ Create an AMI from puppet files
 * [`GIT_BRANCH`]: Git branch to use in the Puppet repository, defaults to `master`.
 * [`MANAGE_GIT`]: Prepare the Puppet repository by cloning it (if it doesn't exist), checkout `GIT_BRANCH` and pulling latest changes, defaults to `true`.
 * [`INSTANCE_TYPE`]: Sets the instance type to build on, defaults to `t2.micro`.
-
+* [`OVERRIDE_RACKER_TEMPLATES`]: You can provide additional [Racker](https://github.com/aspring/racker) templates to override the main packer spec (`json`) file. You need to provide the paths of the templates, relative the this packer repo, and separated by a space.

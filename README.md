@@ -19,3 +19,12 @@ Create an AMI from puppet files
 * [`MANAGE_GIT`]: Prepare the Puppet repository by cloning it (if it doesn't exist), checkout `GIT_BRANCH` and pulling latest changes, defaults to `true`.
 * [`INSTANCE_TYPE`]: Sets the instance type to build on, defaults to `t2.micro`.
 * [`OVERRIDE_RACKER_TEMPLATES`]: You can provide additional [Racker](https://github.com/aspring/racker) templates to override the main packer spec (`json`) file. You need to provide the paths of the templates, relative the this packer repo, and separated by a space.
+
+## Requirements
+
+You need the following to run packer with this repo:
+
+- [Packer](https://www.packer.io/)
+- [r10k](https://github.com/puppetlabs/r10k) - `gem install r10k`
+- [Racker](https://github.com/aspring/racker) - `gem install racker`
+- Git
